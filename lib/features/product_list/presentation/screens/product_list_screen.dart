@@ -169,16 +169,19 @@ class _SearchField extends ConsumerStatefulWidget {
 
 class _SearchFieldState extends ConsumerState<_SearchField> {
   late final TextEditingController _controller;
+  late final FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: ref.read(searchQueryProvider));
+    _focusNode = FocusNode();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -187,7 +190,8 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
     final query = ref.watch(searchQueryProvider);
 
     return TextField(
-      onTapOutside: (event) => FocusScope.of(context).unfocus(),
+      focusNode: _focusNode, // ← add this
+      onTapOutside: (event) => _focusNode.unfocus(),
       controller: _controller,
       onChanged: (value) =>
           ref.read(searchQueryProvider.notifier).state = value,
