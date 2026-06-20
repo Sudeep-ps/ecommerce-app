@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/page_transitions.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../../../../core/widgets/quantity_stepper.dart';
 import '../../../../domain/entities/product.dart';
@@ -101,7 +102,9 @@ class _ProductDetailContent extends ConsumerWidget {
                     ),
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const CartScreen()),
+                        SharedAxisRoute(
+                            page:
+                                const CartScreen()), // ← was MaterialPageRoute(builder: (_) => const CartScreen())
                       );
                     },
                   ),

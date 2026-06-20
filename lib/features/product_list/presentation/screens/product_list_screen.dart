@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/page_transitions.dart';
 import '../../../../core/widgets/empty_state_view.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../../../../core/widgets/shimmer_product_grid.dart';
@@ -26,7 +27,8 @@ class ProductListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.appName),
+        title: const Image(
+            image: AssetImage('assets/images/logo.png'), height: 32),
         actions: [
           ThemeToggleButton(revealController: revealController),
           Padding(
@@ -88,9 +90,11 @@ class ProductListScreen extends ConsumerWidget {
                           product: product,
                           onTap: () {
                             Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    ProductDetailScreen(productId: product.id),
+                              SharedAxisRoute(
+                                // ← was MaterialPageRoute(
+                                page: ProductDetailScreen(
+                                    productId: product
+                                        .id), //    builder: (_) => ProductDetailScreen(productId: product.id),
                               ),
                             );
                           },
