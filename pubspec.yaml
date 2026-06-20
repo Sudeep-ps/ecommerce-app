@@ -1,0 +1,53 @@
+name: ecommerce_app
+description: "E-Commerce Product Listing Application - Flutter Machine Test"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.5.1
+
+  # Networking
+  dio: ^5.4.3+1
+
+  # Local Storage (cart persistence)
+  shared_preferences: ^2.2.3
+
+  # Functional error handling (Either<Failure, T> in repositories)
+  dartz: ^0.10.1
+
+  # Value equality for domain entities (Product, CartItem)
+  equatable: ^2.0.5
+
+  # Image loading with caching + placeholders
+  cached_network_image: ^3.3.1
+
+  # UI
+  cupertino_icons: ^1.0.6
+  shimmer: ^3.0.0
+  google_fonts: ^6.2.1
+  fluttertoast: ^8.2.5
+
+  # Logging (Dio request/response logging in dev)
+  logger: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+  # Testing
+  mocktail: ^1.0.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
