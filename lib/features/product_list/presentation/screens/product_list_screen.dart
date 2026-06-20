@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,38 +5,30 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../core/widgets/empty_state_view.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../../../../core/widgets/shimmer_product_grid.dart';
+import '../../../../core/widgets/theme_toggle_button.dart';
 import '../../../../providers/cart_provider.dart';
 import '../../../../providers/product_providers.dart';
-import '../../../../providers/theme_provider.dart';
 import '../../../cart/presentation/screens/cart_screen.dart';
 import '../../../product_detail/presentation/screens/product_detail_screen.dart';
 import '../widgets/category_filter_chips.dart';
 import '../widgets/product_card.dart';
 
+// Replace the class declaration + start of build() with:
 class ProductListScreen extends ConsumerWidget {
-  const ProductListScreen({super.key});
+  final ThemeRevealController revealController;
+
+  const ProductListScreen({super.key, required this.revealController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filteredProducts = ref.watch(filteredProductListProvider);
     final cartCount = ref.watch(cartItemCountProvider);
-    final themeMode = ref.watch(themeModeProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
-        centerTitle: true,
         actions: [
-          IconButton(
-            tooltip: 'Toggle dark mode',
-            icon: Icon(
-              themeMode == ThemeMode.dark
-                  ? Icons.dark_mode_rounded
-                  : Icons.light_mode_rounded,
-            ),
-            onPressed: () =>
-                unawaited(ref.read(themeModeProvider.notifier).toggleTheme()),
-          ),
+          ThemeToggleButton(revealController: revealController),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: _CartIconButton(count: cartCount),

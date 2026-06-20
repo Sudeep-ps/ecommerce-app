@@ -4,13 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/theme_toggle_button.dart';
 import 'features/product_list/presentation/screens/product_list_screen.dart';
 import 'providers/core_providers.dart';
 import 'providers/theme_provider.dart';
 
 Future<void> main() async {
-  // Required before calling any async platform-channel APIs (like
-  // SharedPreferences) prior to runApp().
   WidgetsFlutterBinding.ensureInitialized();
 
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -18,10 +17,6 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        // Resolve the "real" SharedPreferences instance once at startup and
-        // inject it, so every other provider that depends on it (cart,
-        // theme) can stay synchronous instead of needing its own
-        // FutureProvider/loading state.
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
       child: const MyApp(),
@@ -29,11 +24,18 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  final _revealController = ThemeRevealController();
+
+  @override
+  Widget build(BuildContext context) {
     final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
@@ -42,7 +44,13 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
-      home: const ProductListScreen(),
+      builder: (context, child) {
+        return ThemeRevealWrapper(
+          controller: _revealController,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
+      home: ProductListScreen(revealController: _revealController),
     );
   }
 }
