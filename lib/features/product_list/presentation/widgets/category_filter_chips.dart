@@ -33,7 +33,7 @@ class CategoryFilterChips extends ConsumerWidget {
           final isSelected = selected == category;
 
           return ChoiceChip(
-            side: const BorderSide(color: Color.fromARGB(255, 82, 224, 162)),
+            side: const BorderSide(color: Colors.grey),
             backgroundColor: themeMode == ThemeMode.light
                 ? Colors.grey[200]
                 : Colors.white.withValues(alpha: 0.1),

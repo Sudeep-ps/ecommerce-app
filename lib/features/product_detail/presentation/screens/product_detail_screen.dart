@@ -9,6 +9,7 @@ import '../../../../core/widgets/quantity_stepper.dart';
 import '../../../../domain/entities/product.dart';
 import '../../../../providers/cart_provider.dart';
 import '../../../../providers/product_detail_provider.dart';
+import '../../../../providers/theme_provider.dart';
 import '../../../cart/presentation/screens/cart_screen.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
@@ -17,7 +18,8 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
   const ProductDetailScreen({super.key, required this.productId});
 
   @override
-  ConsumerState<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
@@ -37,7 +39,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         appBar: AppBar(),
         body: ErrorView(
           message: error.toString(),
-          onRetry: () => ref.invalidate(productDetailProvider(widget.productId)),
+          onRetry: () =>
+              ref.invalidate(productDetailProvider(widget.productId)),
         ),
       ),
       data: (product) => Scaffold(
@@ -74,6 +77,7 @@ class _ProductDetailContent extends ConsumerWidget {
     final alreadyInCart = ref.watch(isInCartProvider(product.id));
     final cartQuantity = ref.watch(cartItemQuantityProvider(product.id));
     final totalCartCount = ref.watch(cartItemCountProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return CustomScrollView(
       slivers: [
@@ -82,6 +86,7 @@ class _ProductDetailContent extends ConsumerWidget {
           pinned: true,
           backgroundColor: colorScheme.surface,
           foregroundColor: colorScheme.onSurface,
+          leading: const BackButton(color: Colors.black),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 8),
@@ -90,7 +95,10 @@ class _ProductDetailContent extends ConsumerWidget {
                 children: [
                   IconButton(
                     tooltip: AppStrings.myCart,
-                    icon: const Icon(Icons.shopping_cart_outlined),
+                    icon: const Icon(
+                      Icons.shopping_cart_outlined,
+                      color: Colors.black,
+                    ),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => const CartScreen()),
@@ -103,7 +111,8 @@ class _ProductDetailContent extends ConsumerWidget {
                       top: 4,
                       child: Container(
                         padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
+                        constraints:
+                            const BoxConstraints(minWidth: 18, minHeight: 18),
                         decoration: BoxDecoration(
                           color: colorScheme.error,
                           shape: BoxShape.circle,
@@ -157,12 +166,14 @@ class _ProductDetailContent extends ConsumerWidget {
                 const SizedBox(height: 12),
                 Text(
                   product.title,
-                  style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700),
+                  style: textTheme.headlineSmall
+                      ?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Icon(Icons.star_rounded, size: 20, color: Colors.amber.shade600),
+                    Icon(Icons.star_rounded,
+                        size: 20, color: Colors.amber.shade600),
                     const SizedBox(width: 4),
                     Text(
                       '${product.rating} (${product.ratingCount} reviews)',
@@ -183,7 +194,8 @@ class _ProductDetailContent extends ConsumerWidget {
                 const SizedBox(height: 24),
                 Text(
                   AppStrings.description,
-                  style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                  style: textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -198,16 +210,19 @@ class _ProductDetailContent extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                      color:
+                          colorScheme.primaryContainer.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.check_circle_rounded, color: colorScheme.primary, size: 20),
+                        Icon(Icons.check_circle_rounded,
+                            color: colorScheme.primary, size: 20),
                         const SizedBox(width: 8),
                         Text(
                           '$cartQuantity already in your cart',
-                          style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                          style: textTheme.bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -249,10 +264,13 @@ class ProductDetailBottomBar extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 16, 20, 16 + MediaQuery.of(context).padding.bottom),
+      padding: EdgeInsets.fromLTRB(
+          20, 16, 20, 16 + MediaQuery.of(context).padding.bottom),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        border: Border(top: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.5))),
+        border: Border(
+            top: BorderSide(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.5))),
       ),
       child: SafeArea(
         top: false,

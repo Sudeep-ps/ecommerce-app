@@ -209,6 +209,20 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
                 },
               )
             : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.blue, width: 1.5),
+        ),
+        // 2. Border style when the textfield is active and typed in
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.green, width: 2.0),
+        ),
+        // 3. Border style when the textfield is idle but clickable
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+        ),
       ),
     );
   }
