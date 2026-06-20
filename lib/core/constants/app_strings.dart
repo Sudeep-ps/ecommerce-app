@@ -18,7 +18,7 @@ class AppSpacing {
 class AppStrings {
   AppStrings._();
 
-  static const String appName = 'ShopEase';
+  static const String appName = 'Ewire';
 
   // Product list
   static const String products = 'Products';
@@ -38,7 +38,8 @@ class AppStrings {
   // Cart
   static const String myCart = 'My Cart';
   static const String emptyCartTitle = 'Your cart is empty';
-  static const String emptyCartSubtitle = 'Browse products and add items to your cart';
+  static const String emptyCartSubtitle =
+      'Browse products and add items to your cart';
   static const String subtotal = 'Subtotal';
   static const String tax = 'Tax (5%)';
   static const String shipping = 'Shipping';

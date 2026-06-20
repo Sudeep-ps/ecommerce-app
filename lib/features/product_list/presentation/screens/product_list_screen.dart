@@ -27,6 +27,7 @@ class ProductListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
+        centerTitle: true,
         actions: [
           IconButton(
             tooltip: 'Toggle dark mode',
@@ -35,7 +36,8 @@ class ProductListScreen extends ConsumerWidget {
                   ? Icons.dark_mode_rounded
                   : Icons.light_mode_rounded,
             ),
-            onPressed: () => unawaited(ref.read(themeModeProvider.notifier).toggleTheme()),
+            onPressed: () =>
+                unawaited(ref.read(themeModeProvider.notifier).toggleTheme()),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -82,7 +84,8 @@ class ProductListScreen extends ConsumerWidget {
                 return SliverPadding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                   sliver: SliverGrid(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
@@ -96,7 +99,8 @@ class ProductListScreen extends ConsumerWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => ProductDetailScreen(productId: product.id),
+                                builder: (_) =>
+                                    ProductDetailScreen(productId: product.id),
                               ),
                             );
                           },
@@ -189,8 +193,10 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
     final query = ref.watch(searchQueryProvider);
 
     return TextField(
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       controller: _controller,
-      onChanged: (value) => ref.read(searchQueryProvider.notifier).state = value,
+      onChanged: (value) =>
+          ref.read(searchQueryProvider.notifier).state = value,
       decoration: InputDecoration(
         hintText: AppStrings.searchHint,
         prefixIcon: const Icon(Icons.search_rounded),

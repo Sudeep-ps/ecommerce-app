@@ -1,6 +1,6 @@
-# 🛒 ShopEase — E-Commerce Product Listing App
+# 🛒 Ewire E-Commerce Product Listing App
 
-Welcome to **ShopEase**! This is a modern, fully functional e-commerce catalog app built with Flutter. 
+Welcome to **Ewire**! This is a modern, fully functional e-commerce catalog app built with Flutter. 
 
 I built this project to practice writing clean, production-ready code using **Riverpod** for state management and **Clean Architecture** principles. It connects to the live public [FakeStore API](https://fakestoreapi.com) to fetch real products, categories, and ratings instead of using hardcoded mock data.
 
