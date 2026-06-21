@@ -188,7 +188,7 @@ class _ProductDetailContent extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  '\$${product.price.toStringAsFixed(2)}',
+                  '\u20B9 ${product.price.toStringAsFixed(2)}',
                   style: textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                     color: colorScheme.primary,

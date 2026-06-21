@@ -36,7 +36,8 @@ class CartItemTile extends StatelessWidget {
           color: colorScheme.errorContainer,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Icon(Icons.delete_outline_rounded, color: colorScheme.onErrorContainer),
+        child: Icon(Icons.delete_outline_rounded,
+            color: colorScheme.onErrorContainer),
       ),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
@@ -74,12 +75,14 @@ class CartItemTile extends StatelessWidget {
                     product.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '\$${product.price.toStringAsFixed(2)} each',
-                    style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                    '\u20B9 ${product.price.toStringAsFixed(2)} each',
+                    style: textTheme.bodySmall
+                        ?.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -90,7 +93,7 @@ class CartItemTile extends StatelessWidget {
                         onChanged: onQuantityChanged,
                       ),
                       Text(
-                        '\$${cartItem.totalPrice.toStringAsFixed(2)}',
+                        '\u20B9 ${cartItem.totalPrice.toStringAsFixed(2)}',
                         style: textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: colorScheme.primary,
@@ -104,7 +107,8 @@ class CartItemTile extends StatelessWidget {
             IconButton(
               tooltip: AppStrings.removeItem,
               visualDensity: VisualDensity.compact,
-              icon: Icon(Icons.close_rounded, size: 18, color: colorScheme.outline),
+              icon: Icon(Icons.close_rounded,
+                  size: 18, color: colorScheme.outline),
               onPressed: onRemove,
             ),
           ],
