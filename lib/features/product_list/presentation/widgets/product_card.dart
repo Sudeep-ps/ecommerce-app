@@ -63,12 +63,14 @@ class ProductCard extends StatelessWidget {
                     product.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.star_rounded, size: 16, color: Colors.amber.shade600),
+                      Icon(Icons.star_rounded,
+                          size: 16, color: Colors.amber.shade600),
                       const SizedBox(width: 2),
                       Text(
                         product.rating.toStringAsFixed(1),
@@ -86,7 +88,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    '\$${product.price.toStringAsFixed(2)}',
+                    '\u20B9 ${product.price.toStringAsFixed(2)}',
                     style: textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: colorScheme.primary,

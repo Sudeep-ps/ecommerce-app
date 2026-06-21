@@ -50,10 +50,11 @@ class OrderSummaryCard extends StatelessWidget {
             children: [
               Text(
                 AppStrings.total,
-                style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                style: textTheme.titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w700),
               ),
               Text(
-                '\$${total.toStringAsFixed(2)}',
+                '\u20B9 ${total.toStringAsFixed(2)}',
                 style: textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: colorScheme.primary,
@@ -88,10 +89,11 @@ class _SummaryRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+          style: textTheme.bodyMedium
+              ?.copyWith(color: colorScheme.onSurfaceVariant),
         ),
         Text(
-          freeLabel ? AppStrings.free : '\$${value.toStringAsFixed(2)}',
+          freeLabel ? AppStrings.free : '\u20B9 ${value.toStringAsFixed(2)}',
           style: textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: freeLabel ? colorScheme.primary : null,
